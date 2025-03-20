@@ -1,12 +1,12 @@
 import { RepoRankService } from './../../core/services/repo_rank/repo-rank.service';
 import { Component, Inject, inject, OnInit } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { Irank } from '../../core/interfaces/irank';
 import { SortPipe } from '../../shared/pipe/sort/sort.pipe';
 
 @Component({
   selector: 'app-repo-rank',
-  imports: [ SortPipe],
+  imports: [ SortPipe, CommonModule],
   templateUrl: './repo-rank.component.html',
   styleUrl: './repo-rank.component.css'
 })
@@ -21,6 +21,7 @@ export class RepoRankComponent implements OnInit {
   // ];
 
   reporank !: Irank[];
+  isLoading = false;
 
 
   private readonly _RepoRankService = inject(RepoRankService);
@@ -49,11 +50,12 @@ export class RepoRankComponent implements OnInit {
 
 
   rank(reponame : string ):void{
+    this.isLoading = true;
     this._RepoRankService.rankrepo(reponame).subscribe({
       next:(res)=>{
         console.log(res)
         this.getreporank()
-
+        this.isLoading = false;
       }
     })
   }

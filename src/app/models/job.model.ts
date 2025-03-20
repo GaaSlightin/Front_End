@@ -6,6 +6,7 @@ export interface Job {
     source: string;
     url: string;
     userId: string;
+    skills: string[];
     createdAt: string;
     updatedAt: string;
     __v: number;
