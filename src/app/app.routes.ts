@@ -11,17 +11,19 @@ import { ResumeComponent } from './pages/resume/resume.component';
 import { BlogPostComponent } from './pages/blog-post/blog-post.component';
 import { ResgenratorComponent } from './pages/resgenrator/resgenrator.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { JobDescreptionComponent } from './pages/job-descreption/job-descreption.component';
+import { authGuardGuard } from './core/guard/auth_guard/auth-guard.guard';
+import { PostComponent } from './pages/post/post.component';
 
 export const routes: Routes = [
     // Authentication Routes
     {
-        path: '', component: AuthLayoutComponent, children: [
-            //tempo do not remove
-            { path: '', redirectTo: 'profile', pathMatch: 'full' },
+        path: '', component: AuthLayoutComponent, children: [    
+            { path: '', redirectTo: 'home', pathMatch: 'full' }, 
             { path: 'home', component: LandingComponent, title: 'Home' },
             { path: 'auth', component: AuthComponent, title: 'auth' },
             { path: 'signup', component: SignupComponent, title: 'Signup' }
-        ]
+        ] 
     },
 
     // Main Layout Routes
@@ -30,14 +32,14 @@ export const routes: Routes = [
             
             { path: 'profile', component: ProfileComponent, title: 'Profile' },
             { path: 'gaas', component: GaasComponent, title: 'GAAS' },
-            { path: 'jobs', component: JobsArchivalComponent, title: 'Jobs' },
+            { path: 'jobs', component: JobsArchivalComponent, title: 'All Archival Jobs'},
             { path: 'repos', component: RepoRankComponent, title: 'Repositories' },
             { path: 'resumes', component: ResumeComponent, title: 'Resumes' },
             { path: 'blog', component: BlogPostComponent, title: 'Blog' },
-            { path: 'generator', component: ResgenratorComponent, title: 'Resume Generator' }
-        ]
-    },
+            { path: 'generator', component: ResgenratorComponent, title: 'Resume Generator' },
+            { path: 'jobs/:id', component: JobDescreptionComponent, title: 'description' },
+            { path: 'post/:id', component: PostComponent, title: 'post' }
 
-    // Redirect unknown routes to home
-    { path: '**', redirectTo: 'auth/home', pathMatch: 'full' }
+        ] , canActivate : [authGuardGuard]
+    },
 ];

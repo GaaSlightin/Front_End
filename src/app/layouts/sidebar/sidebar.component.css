@@ -1,4 +1,10 @@
-aside{
-    background-color: var(--main-color);
-    color: var(--light-color);
+/* .asid-back {
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+} */
+
+.hr-stylish {
+    height: 2px;
+    opacity: 0.1;
+
+
 }
